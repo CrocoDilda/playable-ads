@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,17 +7,31 @@
     <title>playable-ads</title>
   </head>
   <body>
-    <img src="./images/bg.png" alt="" class="background-image" inline />
+    <img src="./images/bg.webp" alt="" class="background-image" inline />
     <header class="header">
       <p class="header--logo_text left">играй</p>
       <p class="header--logo_text center">и</p>
-      <div class="header--logo">
+      <div class="header--logo neon-border">
         <p class="header--logo_text">playable-ads</p>
       </div>
       <p class="header--logo_text right">выигрывай</p>
     </header>
     <main class="main">
-      <section class=""></section>
+      <section class="table container">
+        <h1 class="table--title">Угадай где алмаз и забери его себе!</h1>
+        <ul data-list class="table--list">
+          <li class="table--item">
+            <div data-card class="table--card"></div>
+          </li>
+          <li class="table--item">
+            <div data-card class="table--card"></div>
+          </li>
+          <li class="table--item">
+            <div data-card class="table--card"></div>
+          </li>
+        </ul>
+        <button class="table--start" data-start>Начать игру</button>
+      </section>
     </main>
     <script src="./scripts/script.js" inline></script>
   </body>

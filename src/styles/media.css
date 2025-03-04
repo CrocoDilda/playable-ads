@@ -1,3 +1,11 @@
+@media (max-width: 1300px) {
+  .container {
+    --padding: 50px;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+  }
+}
+
 @media (max-width: 860px) {
   .header--logo_text {
     font-size: 24px;
