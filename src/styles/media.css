@@ -1,0 +1,39 @@
+@media (max-width: 860px) {
+  .header--logo_text {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 1fr auto;
+    gap: 20px 15px;
+    padding: 15px 30px;
+  }
+
+  .header--logo {
+    grid-column: 1/4;
+    text-align: center;
+  }
+
+  .header--logo_text {
+    text-align: center !important;
+  }
+
+  .header .left {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .header .center {
+    display: block;
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  .header .right {
+    grid-column: 3/4;
+    grid-row: 1/2;
+  }
+}
