@@ -1,13 +1,13 @@
 const { src, dest, series } = require("gulp")
 const htmlmin = require("gulp-htmlmin")
 const cleancss = require("gulp-clean-css")
-const terser = require("gulp-terser")
 const cssimport = require("gulp-cssimport")
 const inlineSource = require("gulp-inline-source")
 const replace = require("gulp-replace")
 const { rmSync } = require("fs")
 const path = require("path")
-const concat = require("gulp-concat")
+const rollup = require("rollup")
+const nodeResolve = require("@rollup/plugin-node-resolve").default
 
 function cleanDist() {
   rmSync("./dist", { recursive: true, force: true })
@@ -21,15 +21,17 @@ function processCss() {
     .pipe(dest("src/intermediate/styles"))
 }
 
-function processJs() {
-  return src([
-    "src/scripts/mixing.js",
-    "src/scripts/modal.js",
-    "src/scripts/main.js",
-  ])
-    .pipe(concat("bundle.js"))
-    .pipe(terser())
-    .pipe(dest("src/intermediate/scripts"))
+async function processJs() {
+  const bundle = await rollup.rollup({
+    input: "src/scripts/main.js", // Входной файл
+    plugins: [nodeResolve()], // Плагин для работы с импортами
+  })
+
+  await bundle.write({
+    file: "src/intermediate/scripts/bundle.js", // Путь к собранному файлу
+    format: "iife", // Формат, подходящий для браузеров
+    sourcemap: true, // Карта исходников для отладки
+  })
 }
 
 function copyHtml() {
@@ -41,8 +43,8 @@ function prepareHtml() {
     .pipe(replace('href="./styles/main.css"', 'href="styles/main.css" inline'))
     .pipe(
       replace(
-        '<script type="module" src="./scripts/main.js" inline></script>',
-        '<script src="scripts/bundle.js" inline></script>'
+        ' <script type="module" src="./scripts/main.js" inline></script>',
+        '<script src="/scripts/bundle.js" inline></script>' // Здесь используем bundle.js
       )
     )
     .pipe(dest("src/intermediate"))
