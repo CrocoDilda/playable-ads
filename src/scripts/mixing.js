@@ -1,6 +1,6 @@
 const cards = document.querySelectorAll("[data-card]")
 const container = document.querySelector("[data-list]")
-const locking = document.querySelectorAll("[data-locking]")
+const lock = document.querySelectorAll("[data-locking]")
 
 const shuffleDuration = 4000 // Время анимации в ms
 const stepsCount = 18 // Количество обменов
@@ -8,7 +8,7 @@ let positions = calculatePositions()
 let stepWidth = positions[1]
 
 // Разблокируем экран после перемешивания
-const screenUnLock = () => locking[0].classList.remove("locking-active")
+const screenUnLock = () => lock[0].classList.remove("locking-active")
 
 // Вычисляем стартовые позиции карт
 function calculatePositions() {

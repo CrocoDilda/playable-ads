@@ -9,6 +9,7 @@
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
+    "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",

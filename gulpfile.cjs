@@ -7,6 +7,7 @@ const inlineSource = require("gulp-inline-source")
 const replace = require("gulp-replace")
 const { rmSync } = require("fs")
 const path = require("path")
+const concat = require("gulp-concat")
 
 function cleanDist() {
   rmSync("./dist", { recursive: true, force: true })
@@ -21,7 +22,12 @@ function processCss() {
 }
 
 function processJs() {
-  return src("src/scripts/script.js")
+  return src([
+    "src/scripts/mixing.js",
+    "src/scripts/modal.js",
+    "src/scripts/main.js",
+  ])
+    .pipe(concat("bundle.js"))
     .pipe(terser())
     .pipe(dest("src/intermediate/scripts"))
 }
@@ -34,7 +40,10 @@ function prepareHtml() {
   return src("src/intermediate/index.html")
     .pipe(replace('href="./styles/main.css"', 'href="styles/main.css" inline'))
     .pipe(
-      replace('src="./scripts/script.js"', 'src="scripts/script.js" inline')
+      replace(
+        '<script type="module" src="./scripts/main.js" inline></script>',
+        '<script src="scripts/bundle.js" inline></script>'
+      )
     )
     .pipe(dest("src/intermediate"))
 }

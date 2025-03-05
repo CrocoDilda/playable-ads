@@ -1,11 +1,12 @@
-import { startShuffle } from "./script.js"
-import { createNeonConfetti } from "./confetti.js"
+import { startShuffle } from "./mixing.js"
+import { createConfetti, showModal, winObj, loseObj } from "./modal.js"
+
 const win = "💎"
 const lose = "💩"
 let winningCard = Math.floor(Math.random() * (4 - 1))
 let gameWasPlayed = false
 
-const cards = [...document.querySelectorAll("[data-card]")]
+const cardsArr = [...document.querySelectorAll("[data-card]")]
 const startButton = document.querySelector("[data-start]")
 const icons = [...document.querySelectorAll("[data-icons]")]
 const allIcons = [...document.querySelectorAll("[data-icon]")]
@@ -15,33 +16,33 @@ const locking = document.querySelectorAll("[data-locking]")
 const screenLock = () => locking[0].classList.add("locking-active")
 
 function showAllCards() {
-  cards.forEach((card) => card.classList.remove("clouse"))
+  cardsArr.forEach((card) => card.classList.remove("clouse"))
 }
 
 function hideAllCards() {
-  cards.forEach((card) => card.classList.add("clouse"))
+  cardsArr.forEach((card) => card.classList.add("clouse"))
 }
 
-// Начало игры
-showAllCards()
-
 // При клике — раскрываем все карты (финал)
-cards.forEach((card) => {
+cardsArr.forEach((card) => {
   card.addEventListener("click", () => {
     showAllCards()
     if (gameWasPlayed) {
       if (card.children[0].children[1].innerText === win) {
         console.log(win)
-        createNeonConfetti()
+        createConfetti()
+        showModal(winObj)
       } else {
-        console.log(lose)
+        showModal(loseObj)
       }
       gameWasPlayed = false
     }
   })
 })
 
-async function startGame() {
+showAllCards()
+
+function startGame() {
   hideAllCards()
   screenLock()
   setTimeout(() => {
@@ -69,7 +70,7 @@ function changeVictoryCard() {
   }
 }
 
+startButton.addEventListener("click", () => startGame())
+
 resetAllCards()
 changeVictoryCard()
-
-startButton.addEventListener("click", () => startGame())
