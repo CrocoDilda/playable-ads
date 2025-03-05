@@ -67,3 +67,18 @@ body::before {
   -moz-box-shadow: 0px 0px 1px 1px#ffffff;
   box-shadow: 0px 0px 1px 1px #ffffff;
 }
+
+.locking {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  z-index: 20;
+}
+
+.locking-active {
+  display: inherit;
+}
