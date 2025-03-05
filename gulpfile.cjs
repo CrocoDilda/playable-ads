@@ -23,14 +23,14 @@ function processCss() {
 
 async function processJs() {
   const bundle = await rollup.rollup({
-    input: "src/scripts/main.js", // Входной файл
-    plugins: [nodeResolve()], // Плагин для работы с импортами
+    input: "src/scripts/main.js",
+    plugins: [nodeResolve()],
   })
 
   await bundle.write({
-    file: "src/intermediate/scripts/bundle.js", // Путь к собранному файлу
-    format: "iife", // Формат, подходящий для браузеров
-    sourcemap: true, // Карта исходников для отладки
+    file: "src/intermediate/scripts/bundle.js",
+    format: "iife",
+    sourcemap: true,
   })
 }
 
@@ -44,7 +44,7 @@ function prepareHtml() {
     .pipe(
       replace(
         ' <script type="module" src="./scripts/main.js" inline></script>',
-        '<script src="/scripts/bundle.js" inline></script>' // Здесь используем bundle.js
+        '<script src="/scripts/bundle.js" inline></script>'
       )
     )
     .pipe(dest("src/intermediate"))

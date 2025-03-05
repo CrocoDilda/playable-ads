@@ -9,18 +9,13 @@
   "keywords": [],
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean": "^0.4.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "gulp-clean-css": "^4.3.0",
-    "gulp-concat": "^2.6.1",
     "gulp-cssimport": "^7.0.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-inline-source": "^4.0.0",
     "gulp-replace": "^1.1.4",
-    "gulp-rollup": "^2.17.0",
-    "gulp-terser": "^2.1.0",
-    "rollup": "^2.79.2"
+    "rollup": "^2.78.0"
   },
   "dependencies": {
     "gulp": "^4.0.2"
